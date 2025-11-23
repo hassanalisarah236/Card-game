@@ -1,7 +1,31 @@
-const SUITS = ["♠","♥", "♣", "♦"]
-const VALUES = [ "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+const SUITS = ["♠", "♥", "♣", "♦"]
+const VALUES = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
 
-export default class Deck {
+class Card {
+  constructor(suit, value) {
+    this.suit = suit
+    this.value = value
+  }
+
+  get color() {
+    return this.suit === "♠" || this.suit === "♣" ? "black" : "red"
+  }
+
+  getName() {
+    return `${this.value} ${this.suit}`
+  }
+
+  getHTML() {
+    if (typeof document === "undefined") return null; // not used in CLI
+    const cardDiv = document.createElement("div")
+    cardDiv.innerText = this.suit
+    cardDiv.classList.add("card", this.color)
+    cardDiv.dataset.value = `${this.value} ${this.suit}`
+    return cardDiv
+  }
+}
+
+class Deck {
   constructor(cards = freshDeck()) {
     this.cards = cards
   }
@@ -11,30 +35,28 @@ export default class Deck {
   }
 
   shuffle() {
-    //Gets a perfectly random shuffle every time
     for (let i = this.numberOfCards - 1; i > 0; i--) {
-      //Generate a random index before the current card we're on
-      //floor function to make sure we get an integer
-      const newIndex = Math.floor(Math.random() * (i + 1))}
-      //flip the values at the new index with the current index
-      //oldValue acts as an intermediary to hold one of the values while we swap
+      const newIndex = Math.floor(Math.random() * (i + 1))
       const oldValue = this.cards[newIndex]
       this.cards[newIndex] = this.cards[i]
       this.cards[i] = oldValue
     }
   }
 
-class Card {
-  constructor(suit, value) {
-    this.suit = suit
-    this.value = value
+  pop() {
+    return this.cards.shift()
+  }
+
+  push(card) {
+    this.cards.push(card)
   }
 }
 
-function freshDeck(){
+// Create a fresh deck
+function freshDeck() {
   return SUITS.flatMap(suit => {
-    return VALUES.map(value => {
-      return new Card(suit, value)
-    })
+    return VALUES.map(value => new Card(suit, value))
   })
 }
+
+module.exports = { Deck, Card }

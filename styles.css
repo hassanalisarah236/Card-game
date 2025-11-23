@@ -1,9 +1,71 @@
 *, ::after, ::before {
   box-sizing: border-box;
 }
+
 body {
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 4rem);
-    grid-template-rows: 7rem 2rem 7rem;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 6rem);
+  grid-template-rows: 8rem 3rem 8rem;
+  gap: .75rem;
+  cursor: pointer;
+  justify-content: center;
+  padding-top: 2rem;
+  background: linear-gradient(135deg, #ffe6f2, #e6f0ff);
+  font-family: "Comic Sans MS", "Poppins", sans-serif;
+}
+
+
+.deck {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.8rem;
+  border-radius: 1.2rem;
+  background-color: white;
+  user-select: none;
+  border: 3px solid #ffd6e8;
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deck:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(255, 182, 193, 0.6);
+}
+
+
+.computer-deck {
+  background-color: #c1e7ff; /* pastel baby blue */
+  border-color: #a3d8ff;
+}
+
+.player-deck {
+  background-color: #ffd1f5; /* pastel pink */
+  border-color: #ffb3e0;
+}
+
+
+.text {
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  color: #ff6fa8;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(255, 100, 150, 0.3);
+}
+
+.card {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border: 2px solid #ffcce6;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: cen
 }
